@@ -145,5 +145,7 @@ async function handleEvent(event) {
     });
 }
 
-app.listen(PORT);
+// app.listen(PORT);
+// console.log(`Server running at ${PORT}`);
+(process.env.NOW_REGION) ? module.exports = app: app.listen(PORT);
 console.log(`Server running at ${PORT}`);
