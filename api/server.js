@@ -16,8 +16,7 @@ const app = express();
 app.get('/', (req, res) => res.send('Hello LINE BOT!(GET)'));
 
 app.post('/webhook', line.middleware(config), (req, res) => {
-    console.log(req.body.events);
-
+    console.log(req.body.events)
 
     Promise
         .all(req.body.events.map(handleEvent))
@@ -56,46 +55,64 @@ async function handleEvent(event) {
 
             case 'クマデ':
                 replyImage = `1-2.jpg`;
-                return client.replyMessage(event.replyToken, {
+                return client.replyMessage(event.replyToken, [{
+                    type: 'text',
+                    text: "認証に成功しました。\nキーワードを出力します"
+                }, {
                     type: 'image',
                     originalContentUrl: IMG_ROOT + replyImage,
                     previewImageUrl: IMG_ROOT + replyImage
-                });
+                }]);
             case 'ズコウ':
                 replyImage = `1-3.jpg`;
-                return client.replyMessage(event.replyToken, {
+                return client.replyMessage(event.replyToken, [{
+                    type: 'text',
+                    text: "認証に成功しました。\nキーワードを出力します"
+                }, {
                     type: 'image',
                     originalContentUrl: IMG_ROOT + replyImage,
                     previewImageUrl: IMG_ROOT + replyImage
-                });
+                }]);
             case 'オダノブナガ':
                 replyImage = `1-4.jpg`;
-                return client.replyMessage(event.replyToken, {
+                return client.replyMessage(event.replyToken, [{
+                    type: 'text',
+                    text: "認証に成功しました。\nキーワードを出力します"
+                }, {
                     type: 'image',
                     originalContentUrl: IMG_ROOT + replyImage,
                     previewImageUrl: IMG_ROOT + replyImage
-                });
+                }]);
             case 'ラマ':
                 replyImage = `1-5.jpg`;
-                return client.replyMessage(event.replyToken, {
+                return client.replyMessage(event.replyToken, [{
+                    type: 'text',
+                    text: "認証に成功しました。\nキーワードを出力します"
+                }, {
                     type: 'image',
                     originalContentUrl: IMG_ROOT + replyImage,
                     previewImageUrl: IMG_ROOT + replyImage
-                });
+                }]);
             case 'バット':
                 replyImage = `hint.jpg`;
-                return client.replyMessage(event.replyToken, {
+                return client.replyMessage(event.replyToken, [{
+                    type: 'text',
+                    text: "認証に成功しました。\nキーワードを出力します"
+                }, {
                     type: 'image',
                     originalContentUrl: IMG_ROOT + replyImage,
                     previewImageUrl: IMG_ROOT + replyImage
-                });
+                }]);
             case 'キュウリ\nユウガタ\nシロヌノ\nアンマン':
                 replyImage = `last.png`;
-                return client.replyMessage(event.replyToken, {
+                return client.replyMessage(event.replyToken, [{
+                    type: 'text',
+                    text: "認証に成功しました。\nキーワードを出力します"
+                }, {
                     type: 'image',
                     originalContentUrl: IMG_ROOT + replyImage,
                     previewImageUrl: IMG_ROOT + replyImage
-                });
+                }]);
             case '407':
                 if (isPlayng === true) {
                     finishTime = Date.now();
@@ -105,11 +122,8 @@ async function handleEvent(event) {
                     let min = Math.floor(clearTime / 60)
                     let sec = Math.floor(clearTime % 60)
 
-                    replyText = "Game Clear!!!\nクリア時間 :" + min + "m" + sec + "s";
+                    replyText = "あなたの活躍により、すべての謎は解き明かされました。\n解決に要した時間は :" + min + "m" + sec + "s\nお疲れさまでした。";
                     isPlayng = false
-                    console.log(clearTime)
-                    console.log(min);
-                    console.log(sec);
                 } else {
                     replyText = '謎はすべて解き明かされた'
                 }
