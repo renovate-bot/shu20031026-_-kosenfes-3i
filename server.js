@@ -52,7 +52,6 @@ async function handleEvent(event) {
                     originalContentUrl: IMG_ROOT + replyImage,
                     previewImageUrl: IMG_ROOT + replyImage
                 });
-
             case 'クマデ':
                 replyImage = `1-2.jpg`;
                 return client.replyMessage(event.replyToken, [{
@@ -115,28 +114,44 @@ async function handleEvent(event) {
                 }]);
             case '407':
                 if (isPlayng === true) {
-                    finishTime = Date.now();
-                    let clearTime = (finishTime - startTime) / 1000;
-                    // let solidTime = String(clearTime).slice(0, -4);
+                    // finishTime = Date.now();
+                    // let clearTime = (finishTime - startTime) / 1000;
 
-                    let min = Math.floor(clearTime / 60)
-                    let sec = Math.floor(clearTime % 60)
+                    // let min = Math.floor(clearTime / 60)
+                    // let sec = Math.floor(clearTime % 60)
 
-                    replyText = "あなたの活躍により、すべての謎は解き明かされました。\n解決に要した時間は :" + min + "m" + sec + "s\nお疲れさまでした。";
+                    // replyText = "あなたの活躍により、すべての謎は解き明かされました。\n解決に要した時間は :" + min + "m" + sec + "s\nお疲れさまでした。";
+                    replyText = "あなたの活躍により、すべての謎は解き明かされました。";
                     isPlayng = false
                 } else {
                     replyText = '謎はすべて解き明かされた'
+                    return client.replyMessage(event.replyToken, {
+                        type: 'image',
+                        originalContentUrl: IMG_ROOT + replyImage,
+                        previewImageUrl: IMG_ROOT + replyImage
+                    });
                 }
-
-                console.log(isPlayng)
-                break;
+            case 'リタイア':
+                isPlayng = false;
+                return client.replyMessage(event.replyToken, {
+                    type: 'text',
+                    text: 'リタイアを確認しました。またの挑戦をお待ちしております'
+                });
+            case 'restart':
+                isPlayng = true;
+                return client.replyMessage(event.replyToken, {
+                    type: 'text',
+                    text: '再接続しました。引き続き問題にお答えください'
+                });
+                //
             default:
                 replyText = 'なにかを間違えているようだ...';
         }
+
     } else {
         switch (event.message.text) {
             case '012':
-                startTime = Date.now();
+                // startTime = Date.now();
                 isPlayng = true;
                 replyText = `ゲームを開始します`;
                 replyImage = `1-1.jpg`;
@@ -148,6 +163,14 @@ async function handleEvent(event) {
                     originalContentUrl: IMG_ROOT + replyImage,
                     previewImageUrl: IMG_ROOT + replyImage
                 }]);
+                //
+            case 'restart':
+                isPlayng = true;
+                return client.replyMessage(event.replyToken, {
+                    type: 'text',
+                    text: '再接続しました。引き続き問題にお答えください'
+                });
+                //
             default:
                 replyText = 'ゲームを開始してください';
         }
