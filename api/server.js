@@ -26,9 +26,9 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 const client = new line.Client(config);
 
 let isPlayng = false;
-let cleard = false;
-let startTime = 0;
-let finishTime = 0;
+// let cleard = false;
+// let startTime = 0;
+// let finishTime = 0;
 
 async function handleEvent(event) {
     if (event.type !== 'message' || event.message.type !== 'text') {
@@ -171,6 +171,11 @@ async function handleEvent(event) {
                     text: '再接続しました。引き続き問題にお答えください'
                 });
                 //
+            case '407':
+                return client.replyMessage(event.replyToken, {
+                    type: 'text',
+                    text: 'おめでとうございます。ゲームクリアです。'
+                });
             default:
                 replyText = 'ゲームを開始してください';
         }
