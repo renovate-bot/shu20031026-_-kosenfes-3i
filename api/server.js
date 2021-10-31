@@ -131,6 +131,7 @@ async function handleEvent(event) {
                         previewImageUrl: IMG_ROOT + replyImage
                     });
                 }
+                break
             case 'リタイア':
                 isPlayng = false;
                 return client.replyMessage(event.replyToken, {
